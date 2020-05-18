@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="my-3" >
+                <img src="/media/{{ product.images }} " style="height: 375px;width: 273px">
+
+            </div>
+            <div class="row">
+                <button  class="btn btn-info btn-sm mx-3 cart ">add to cart</button>
+                <button class="btn btn-info btn-sm mx-3">buy now</button>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h1 >{{ product.name }}</h1>
+            <p><b>Rs. </b>{{ product.price }}.99 </p>
+            <p>{{ product.title }}</p>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+    if(localStorage.getItem('cartw') == null)
+    {
+     var cart={};
+    }
+    else {
+        var cart=JSON.parse(localStorage.getItem('cartw'))
+    }
+    $('.cart').click(function () {
+      console.log("clicked")
+        var idstr=this.id.toString()
+        console.log(idstr)
+        if(localStorage.getItem(cart[idstr]) !== undefined)
+        {
+            cart[idstr]+=1
+        }
+    else {
+        cart[idstr]=1
+        }
+    console.log(cart)
+          localStorage.setItem('cartw',JSON.stringify(cart))
+
+
+    })
+    document.getElementById('cart').innerText=Object.keys(cart).length
+    $('#popcart').popover('show');
+      document.getElementById('popcart').setAttribute('data-content',"welcome to my website")
+
+
+    </script>
+{% endblock %}
