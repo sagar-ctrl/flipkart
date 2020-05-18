@@ -1,1 +1,1 @@
-web :gunicorn flipkartclone.wsgi --log-file
+web :gunicorn flipkartclone.wsgi --log-file-
